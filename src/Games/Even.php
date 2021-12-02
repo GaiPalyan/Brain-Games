@@ -21,7 +21,7 @@ class Even
         return $number % 2 === 0;
     }
 
-    public function getGameData(): array
+    private function getGameData(): array
     {
         $question = random_int(self::RANGE_MIN, self::RANGE_MAX);
         $answer = $this->isEven($question) ? "yes" : "no";

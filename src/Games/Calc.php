@@ -27,7 +27,7 @@ class Calc
         };
     }
 
-    public function getGameData(): array
+    private function getGameData(): array
     {
         $operand1 = random_int(self::RANGE_MIN, self::RANGE_MAX);
         $operand2 = random_int(self::RANGE_MIN, self::RANGE_MAX);

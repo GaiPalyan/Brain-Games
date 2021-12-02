@@ -11,7 +11,6 @@ class GameController
     private string $gameRequest;
     private string $doc;
 
-
     public function __construct(string $gameRequest)
     {
         $this->gameRequest = strtolower($gameRequest);
@@ -24,7 +23,7 @@ class GameController
         DOC;
     }
 
-    public function factory(Engine $engine)
+    private function factory(Engine $engine)
     {
         $game = implode("\\", [__NAMESPACE__, 'Games', ucfirst($this->gameRequest)]);
         if (!class_exists($game)) {
