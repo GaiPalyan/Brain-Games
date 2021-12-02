@@ -6,5 +6,5 @@ namespace App\Games;
 
 interface EngineInterface
 {
-    public function run(string $description, $gameData);
+    public function run(string $description, callable $gameData);
 }
