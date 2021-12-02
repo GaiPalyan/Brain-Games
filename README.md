@@ -1,0 +1,1 @@
+[![CI](https://github.com/GaiPalyan/Brain-Games_OOP/actions/workflows/build.yml/badge.svg)](https://github.com/GaiPalyan/Brain-Games_OOP/actions/workflows/build.yml)
