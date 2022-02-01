@@ -4,41 +4,60 @@ declare(strict_types=1);
 
 namespace App;
 
-use function cli\line;
+use Exception;
+use function cli\prompt;
 
 class GameController
 {
-    private string $gameRequest;
-    private string $doc;
+    private string $command;
+    private Engine $engine;
+    private const MENU = [
+        'even' => 'Even',
+        'calc' => 'Calc',
+        'gcd' => 'Gcd',
+        'prime' => 'Prime',
+        'progression' => 'Progression'
+    ];
+    private const DOCK = PHP_EOL . <<<DOC
+        1) Even
+        2) Calc
+        3) Gcd
+        4) Prime
+        5) Progression
+        DOC . PHP_EOL;
 
-    public function __construct(string $gameRequest)
+    private function __construct(string $command, Engine $engine)
     {
-        $this->gameRequest = strtolower($gameRequest);
-        $this->doc = <<<DOC
-        1) make game=Even
-        2) make game=Calc
-        3) make game=Gcd
-        4) make game=Prime
-        5) make game=Progression
-        DOC;
+        $this->command = $command;
+        $this->engine = $engine;
     }
 
-    private function factory(Engine $engine)
+    private function getGame()
     {
-        $game = implode("\\", [__NAMESPACE__, 'Games', ucfirst($this->gameRequest)]);
-        if (!class_exists($game)) {
-            throw new \Exception('That game is not exist =( try some command from this list');
-        }
-        return new $game($engine);
+        $game = implode("\\", [__NAMESPACE__, 'Games', $this->command]);
+        return new $game($this->engine);
     }
 
+    /**
+     * @throws Exception
+     */
     public function play(): void
     {
-        try {
-            $this->factory(new Engine())->execute();
-        } catch (\Exception $exception) {
-            line($exception->getMessage());
-            line($this->doc);
+        $this->getGame()->execute();
+    }
+
+    public static function make(array $argv): GameController
+    {
+        $command = isset($argv[1])
+            ? strtolower($argv[1])
+            : strtolower(prompt('You do not select any game, please choose and type title from this list'
+                                            . PHP_EOL
+                                            . self::DOCK . PHP_EOL));
+
+        if (!array_key_exists($command, self::MENU)) {
+            throw new Exception('Selected game dose not exist =( try some from this list: ' . self::DOCK);
         }
+
+        return new self(self::MENU[strtolower($command)], new Engine());
     }
 }

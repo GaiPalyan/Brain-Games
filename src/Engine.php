@@ -9,7 +9,7 @@ use App\Games\EngineInterface;
 use function cli\line;
 use function cli\prompt;
 
-class Engine implements EngineInterface
+final class Engine implements EngineInterface
 {
     private const ROUNDS_COUNT = 3;
 

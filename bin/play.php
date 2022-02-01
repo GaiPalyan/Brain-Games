@@ -12,5 +12,11 @@ if (file_exists($autoloadPath1)) {
     include_once $autoloadPath2;
 }
 
-$game = new GameController($argv[1]);
-$game->play();
+
+
+try {
+    $game = GameController::make($argv);
+    $game->play();
+} catch (\Exception $e) {
+    echo $e->getMessage();
+}

@@ -4,20 +4,12 @@ declare(strict_types=1);
 
 namespace App\Games;
 
-class Calc
+class Calc extends Game
 {
     private const DESCRIPTION = 'What is the result of the expression?';
     private const OPERATORS = ['+', '-', '*'];
-    private const RANGE_MIN = 1;
-    private const RANGE_MAX = 15;
-    private EngineInterface $engine;
 
-    public function __construct(EngineInterface $engine)
-    {
-        $this->engine = $engine;
-    }
-
-    public function getExpressionResult(int $operand1, int $operand2, string $operator): int
+    private function getExpressionResult(int $operand1, int $operand2, string $operator): int
     {
         return match ($operator) {
             '+' =>  $operand1 + $operand2,
@@ -27,7 +19,7 @@ class Calc
         };
     }
 
-    private function getGameData(): array
+    protected function getGameData(): array
     {
         $operand1 = random_int(self::RANGE_MIN, self::RANGE_MAX);
         $operand2 = random_int(self::RANGE_MIN, self::RANGE_MAX);
