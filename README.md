@@ -1,5 +1,5 @@
 [![CI](https://github.com/GaiPalyan/Brain-Games_OOP/actions/workflows/build.yml/badge.svg)](https://github.com/GaiPalyan/Brain-Games_OOP/actions/workflows/build.yml)
-
+[![Maintainability](https://api.codeclimate.com/v1/badges/cde20b1ef37bb3336dc3/maintainability)](https://codeclimate.com/github/GaiPalyan/Brain-Games/maintainability)
 ###### FAQ
 
 This simple package use makefile, so make sure the `make` command is installed on your system. Then:
