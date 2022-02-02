@@ -8,11 +8,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-      - name: Set-up PHP
-
+      - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.0'
@@ -34,4 +32,3 @@ jobs:
           coverageCommand: make test-coverage
           coverageLocations: ${{github.workplace}}/build/logs/clover.xml:clover
           debug: true
-
